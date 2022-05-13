@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha seu personagem - MapaDev Week</title>
+    <link rel="stylesheet" href="./src/css/variaveis.css" />
+    <link rel="stylesheet" href="./src/css/reset.css" />
+    <link rel="stylesheet" href="./src/css/fontes.css" />
+    <link rel="stylesheet" href="./src/css/animacoes.css" />
+    <style>
+        body {
+  font-family: 'ssf4', Courier, monospace;
+  background: var(--cor-secundaria);
+}
+body:before {
+  content: ' ';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.2;
+  background-image: url("src/imagens/1cYrMYF.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cabecalho {
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+.cabecalho .titulo {
+  color: var(--cor-titulo-fraco);
+  -webkit-text-stroke: 2px var(--cor-titulo-forte);
+  text-transform: uppercase;
+  font-size: 52px;
+  line-height: 102px;
+}
+.selecao-de-personagens {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.selecao-de-personagens .personagem-grande {
+  text-align: center;
+  width: 30%;
+  height: 70vh;
+  position: relative;
+}
+.selecao-de-personagens .personagem-grande img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.selecao-de-personagens .personagem-grande .nome:before {
+  height: 30px;
+  width: 100%;
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+}
+.selecao-de-personagens .personagem-grande .nome h2 {
+  color: var(--cor-padrao);
+  font-family: 'command', sans-serif;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  font-size: 27px;
+}
+.selecao-de-personagens .personagem-grande.personagem-jogador-1 .nome:before {
+  background-color: var(--cor-azul-principal);
+}
+.selecao-de-personagens .personagem-grande.personagem-jogador-2 .nome:before {
+  background-color: var(--cor-vermelha-principal);
+}
+.selecao-de-personagens .lista-de-personagens {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 600px;
+  justify-content: center;
+  gap: 12px;
+}
+.selecao-de-personagens .lista-de-personagens .personagem {
+  border: 2px solid var(--cor-padrao);
+  background-color: var(--cor-padrao);
+  width: 30%;
+  height: 160px;
+  cursor: pointer;
+  border-radius: 5px;
+  position: relative;
+  z-index: 2;
+  transition: 0.15s ease-in-out;
+}
+.selecao-de-personagens .lista-de-personagens .personagem img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+.selecao-de-personagens .lista-de-personagens .personagem.selecionado {
+  border: 2px solid var(--cor-azul-media);
+  animation: c-glowing-blue .3s ease-in-out infinite;
+  animation-direction: alternate;
+}
+.selecao-de-personagens .lista-de-personagens .personagem:hover {
+  animation: c-glowing-blue .3s ease-in-out infinite;
+  animation-direction: alternate;
+  transform: scale(1.07);
+  z-index: 2;
+}
+.selecao-de-personagens .lista-de-personagens .personagem.jogador-2-selecionado {
+  border: 2px solid var(--cor-vermelha-fraca);
+  animation: c-glowing-red .3s ease-in-out infinite;
+  animation-direction: alternate;
+}
+.selecao-de-personagens .lista-de-personagens .personagem.jogador-2-selecionado:hover {
+  animation: c-glowing-red .3s ease-in-out infinite;
+  animation-direction: alternate;
+}
+.selecao-de-personagens .lista-de-personagens .personagem .tag {
+  display: none;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 16px;
+  top: 5px;
+  left: 5px;
+  position: absolute;
+  color: var(--cor-azul-media);
+  transition: opacity .3 ease-in-out;
+  animation-direction: alternate;
+}
+.selecao-de-personagens .lista-de-personagens .personagem.selecionado .tag {
+  display: block;
+  animation: text-glowing-blue .3s ease-in-out infinite;
+  animation-direction: alternate;
+}
+.selecao-de-personagens .lista-de-personagens .personagem.jogador-2-selecionado .tag {
+  display: block;
+  color: var(--cor-vermelha-fraca);
+  animation: text-glowing-red .3s ease-in-out infinite;
+  animation-direction: alternate;
+}
+    </style>
+</head>
+
+<body>
+    <main>
+        <header class="cabecalho">
+            <h1 class="titulo">
+                Character Select
+            </h1>
+        </header>
+        <div class="selecao-de-personagens">
+            <div class="personagem-grande personagem-jogador-1">
+                <img src="./src/imagens/thor.png" alt="Personagem selecionado jogador 1" id="personagem-jogador-1">
+                <div class="nome">
+                    <h2>Thor</h2>
+                </div>
+            </div>
+
+           <ul class="lista-de-personagens">
+                <li class="personagem selecionado" id="thor" data-name="Thor">
+                    <span class="tag">1P</span>
+                    <img src="./src/imagens/thor.jpg" alt="Personagem Thor">
+                </li>
+
+                <li class="personagem" id="homem-de-ferro" data-name="Homem de ferro">
+                    <span class="tag">1P</span>
+                    <img src="./src/imagens/homem-de-ferro.jpg" alt="Personagem Homem de ferro">
+                </li>
+
+                <li class="personagem" id="viuva-negra" data-name="Viúva Negra">
+                    <span class="tag">1P</span>
+                    <img src="./src/imagens/viuva-negra.jpg" alt="Personagem Viúva Negra">
+                </li>
+
+                <li class="personagem" id="hulk" data-name="Hulk">
+                    <span class="tag">1P</span>
+                    <img src="./src/imagens/hulk.jpg" alt="Personagem Hulk">
+                </li>
+
+                <li class="personagem" id="capitao-america" data-name="Capitão América">
+                    <span class="tag">1P</span>
+                    <img src="./src/imagens/capitao-america.jpg" alt="Personagem Capitão América">
+                </li>
+
+                <li class="personagem jogador-2-selecionado" id="ultron" data-name="Ultron">
+                    <span class="tag">2P</span>
+                    <img src="./src/imagens/ultron.jpg" alt="Personagem Ultron">
+                </li>
+
+                <li class="personagem" id="doutor-doom" data-name="Doutor Doom">
+                    <span class="tag">1P</span>
+                    <img src="./src/imagens/doutor-doom.jpg" alt="Personagem Doutor Doom">
+                </li>
+
+                <li class="personagem" id="nova" data-name="Nova">
+                    <span class="tag">1P</span>
+                    <img src="./src/imagens/nova.jpg" alt="Personagem Nova">
+                </li>
+
+                <li class="personagem" id="fenix" data-name="Fênix">
+                    <span class="tag">1P</span>
+                    <img src="./src/imagens/fenix.jpg" alt="Personagem Fênix">
+                </li>
+            </ul>
+
+            <div class="personagem-grande personagem-jogador-2">
+                <img src="./src/imagens/ultron.png" alt="Personagem selecionado jogador 2" id="personagem-jogador-2">
+                <div class="nome">
+                    <h2>Ultron</h2>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
